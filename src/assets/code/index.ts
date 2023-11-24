@@ -1,4 +1,4 @@
-import { Todo } from './todo';
+import { Todo } from '../../app/model/todo';
 
 const todos = [
   new Todo(1, '期中考作業'),
