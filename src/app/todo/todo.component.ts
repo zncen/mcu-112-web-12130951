@@ -1,4 +1,4 @@
-import { Component, Input, booleanAttribute, numberAttribute } from '@angular/core';
+import { Component, EventEmitter, Input, Output, booleanAttribute, numberAttribute } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -11,14 +11,15 @@ import { CommonModule } from '@angular/common';
 export class TodoComponent {
   @Input({ required: true, transform: numberAttribute })
   id!: number;
-
   @Input({ required: true })
   content!: string ;
 
   @Input({ transform: booleanAttribute })
   hasFinished!: boolean;
+  @Output()
+  readonly hasFinishedChange = new EventEmitter();
 
   onSetStatus(hasFinished: boolean): void {
-    this.hasFinished = hasFinished;
+    this.hasFinishedChange.emit(hasFinished);
   }
 }
