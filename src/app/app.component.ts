@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { TodoComponent } from './todo/todo.component';
-
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -12,10 +11,4 @@ export class AppComponent {
   content = '待辦事項 A';
 
   hasFinished = false;
-
-  
-  onSetStatus(hasFinished: boolean): void {
-    this.hasFinished = hasFinished;
-  }
-
 }
