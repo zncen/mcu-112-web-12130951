@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
+
 @Component({
   selector: 'app-todo',
   standalone: true,
@@ -7,10 +8,11 @@ import { CommonModule } from '@angular/common';
   templateUrl: './todo.component.html',
   styleUrl: './todo.component.css',
 })
-export class TodoComponent {
-  content = '待辦事項 A';
-
-  hasFinished = false;
+export class TodoComponent {  
+  @Input()
+  content!: string ;
+  @Input()
+  hasFinished!: boolean;
 
   onSetStatus(hasFinished: boolean): void {
     this.hasFinished = hasFinished;
