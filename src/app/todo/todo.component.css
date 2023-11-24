@@ -8,13 +8,16 @@
   display: flex;
   justify-content: space-between;
 }
-
 span > button {
   margin-right: 5px;
 }
-
 span.completed {
   text-decoration: line-through;
+}
+
+span.finish-date {
+  font-style: 16px;
+  margin-left: 10px;
 }
 
 button.delete {
