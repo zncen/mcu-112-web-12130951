@@ -1,12 +1,10 @@
 import { JsonPipe } from '@angular/common';
 import { Component, inject } from '@angular/core';
-
 import { FooterComponent } from './footer/footer.component';
 import { HeaderComponent } from './header/header.component';
 import { TodoListComponent } from './todo-list/todo-list.component';
 import { Todo } from './model/todo';
 import { TaskService } from './services/task.service';
-
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -19,6 +17,10 @@ export class AppComponent {
 
   tasks = [new Todo(1, '待辦事項 A'), new Todo(2, '待辦事項 B')];
 
+  onAdd(): void {
+    this.taskService.add('待辦事項 C');
+  }
+
   onStateChange(task: { index: number; state: boolean }): void {
     if (task.state) {
       this.tasks[task.index].setFinished(new Date());
@@ -26,11 +28,5 @@ export class AppComponent {
       this.tasks[task.index].finishDate = undefined;
       this.tasks[task.index].hasFinished = false;
     }
-  }
-  onSet(): void {
-    this.tasks = [new Todo(1, '待辦事項 A'), new Todo(2, '待辦事項 B')];
-  }
-  onClear(): void {
-    this.tasks = [];
   }
 }
