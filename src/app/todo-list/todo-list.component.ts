@@ -1,6 +1,5 @@
 import { NgFor, NgIf } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-
 import { Todo } from '../model/todo';
 import { TodoComponent } from '../todo/todo.component';
 @Component({
@@ -12,7 +11,8 @@ import { TodoComponent } from '../todo/todo.component';
 })
 export class TodoListComponent {
   @Input()
-  tasks!: Todo[];
+  tasks?: Todo[];
+
   @Output()
   stateChange = new EventEmitter<{ index: number; state: boolean }>();
 }
