@@ -6,9 +6,7 @@ import {
   Input,
   Output,
 } from '@angular/core';
-
 import { Todo } from '../model/todo';
-
 @Component({
   selector: 'app-todo',
   standalone: true,
@@ -19,12 +17,15 @@ import { Todo } from '../model/todo';
 export class TodoComponent {
   @Input({ required: true })
   task!: Todo;
+
+  @Output()
+  remove = new EventEmitter<void>();
+
   @Output()
   readonly stateChange = new EventEmitter<boolean>();
 
   @HostBinding('class')
   class = 'app-todo';
-
   onSetStatus(hasFinished: boolean): void {
     this.stateChange.emit(hasFinished);
   }
