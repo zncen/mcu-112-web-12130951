@@ -4,8 +4,10 @@ import {
   EventEmitter,
   HostBinding,
   Input,
+  OnInit,
   Output,
 } from '@angular/core';
+
 import { Todo } from '../model/todo';
 @Component({
   selector: 'app-todo',
@@ -17,13 +19,10 @@ import { Todo } from '../model/todo';
 export class TodoComponent {
   @Input({ required: true })
   task!: Todo;
-
   @Output()
   remove = new EventEmitter<void>();
-
   @Output()
   readonly stateChange = new EventEmitter<boolean>();
-
   @HostBinding('class')
   class = 'app-todo';
   onSetStatus(hasFinished: boolean): void {

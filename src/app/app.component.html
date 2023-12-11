@@ -3,10 +3,10 @@
   <button type="button" (click)="onAdd()">Add</button>
   <section class="main">
     <app-todo-list
-      [tasks]="taskService.tasks"
-      (remove)="onRemove($event)"
-      (stateChange)="onStateChange($event)"
-    ></app-todo-list>
-  </section>
-  <app-footer></app-footer>
+    [tasks]="tasks"
+    (remove)="onRemove($event)"
+    (stateChange)="onStateChange($event)"
+  ></app-todo-list>
+</section>
+<app-footer></app-footer>
 </div>
