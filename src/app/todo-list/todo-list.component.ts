@@ -1,13 +1,12 @@
-import { NgFor } from '@angular/common';
+import { NgFor, NgIf } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 import { Todo } from '../model/todo';
 import { TodoComponent } from '../todo/todo.component';
-
 @Component({
   selector: 'app-todo-list',
   standalone: true,
-  imports: [NgFor, TodoComponent],
+  imports: [NgIf, NgFor, TodoComponent],
   templateUrl: './todo-list.component.html',
   styleUrl: './todo-list.component.css',
 })

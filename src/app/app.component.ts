@@ -4,7 +4,6 @@ import { FooterComponent } from './footer/footer.component';
 import { HeaderComponent } from './header/header.component';
 import { TodoListComponent } from './todo-list/todo-list.component';
 import { Todo } from './model/todo';
-
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -14,7 +13,6 @@ import { Todo } from './model/todo';
 })
 export class AppComponent {
   tasks = [new Todo(1, '待辦事項 A'), new Todo(2, '待辦事項 B')];
-
   onStateChange(task: { index: number; state: boolean }): void {
     if (task.state) {
       this.tasks[task.index].setFinished(new Date());
@@ -22,5 +20,13 @@ export class AppComponent {
       this.tasks[task.index].finishDate = undefined;
       this.tasks[task.index].hasFinished = false;
     }
+  }
+
+  onSet(): void {
+    this.tasks = [new Todo(1, '待辦事項 A'), new Todo(2, '待辦事項 B')];
+  }
+
+  onClear(): void {
+    this.tasks = [];
   }
 }
