@@ -4,9 +4,9 @@
   <button type="button" (click)="onClear()">Clear</button>
   <section class="main">
     <app-todo-list
-      [tasks]="tasks"
-      (stateChange)="onStateChange($event)"
-    ></app-todo-list>
-  </section>
-  <app-footer></app-footer>
+    [tasks]="taskService.tasks"
+    (stateChange)="onStateChange($event)"
+  ></app-todo-list>
+</section>
+<app-footer></app-footer>
 </div>
