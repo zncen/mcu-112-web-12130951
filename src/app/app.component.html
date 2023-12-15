@@ -3,17 +3,17 @@
   <button type="button" (click)="onAdd()">Add</button>
   <section class="main">
     <app-todo-list
-      [tasks]="tasks"
-      (remove)="onRemove($event)"
-      (view)="selectedId = $event"
-      (stateChange)="onStateChange($event)"
-    ></app-todo-list>
-  </section>
-  <app-footer></app-footer>
+    [tasks]="tasks$ | async"
+    (remove)="onRemove($event)"
+    (view)="selectedId = $event"
+    (stateChange)="onStateChange($event)"
+  ></app-todo-list>
+</section>
+<app-footer></app-footer>
 </div>
 <ng-container *ngIf="selectedId">
-  <hr />
-  <div class="container">
-    <app-todo-detail [id]="selectedId"></app-todo-detail>
-  </div>
+<hr />
+<div class="container">
+  <app-todo-detail [id]="selectedId"></app-todo-detail>
+</div>
 </ng-container>

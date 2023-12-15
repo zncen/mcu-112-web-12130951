@@ -11,13 +11,12 @@ import { TodoComponent } from '../todo/todo.component';
 })
 export class TodoListComponent {
   @Input()
-  tasks?: Todo[];
+  tasks?: Todo[] | null;
+
   @Output()
   remove = new EventEmitter<number>();
-
   @Output()
   view = new EventEmitter<number>();
-
   @Output()
   stateChange = new EventEmitter<{ id: number; state: boolean }>();
 }
