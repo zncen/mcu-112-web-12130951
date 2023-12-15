@@ -18,13 +18,12 @@ export class TaskRemoteService {
     const task = new Todo({ content });
     return this.httpClient.post<Todo>(this.url, task);
   }
-
   updateState({ id, content }: Todo, hasFinished: boolean): Observable<Todo> {
     const task = new Todo({ content, hasFinished });
     return this.httpClient.put<Todo>(`${this.url}/${id}`, task);
   }
 
-  remove(id: number): void {
-    throw new Error('Method not implemented.');
+  remove(id: number): Observable<Todo> {
+    return this.httpClient.delete<Todo>(`${this.url}/${id}`);
   }
 }
