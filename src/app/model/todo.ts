@@ -1,14 +1,21 @@
 export class Todo {
-  constructor(
-    public id: number,
-    public content: string,
-    public hasFinished: boolean = false
-    ) {}
-  
-    finishDate?: Date;
-  
-    setFinished(finishDate: Date): void {
-      this.hasFinished = true;
-      this.finishDate = finishDate;
+  constructor(initData?: Partial<Todo>) {
+    Object.assign(this, initData);
+    if (this.hasFinished === undefined) {
+      this.hasFinished = false;
     }
   }
+
+  id!: number;
+
+  content!: string;
+
+  hasFinished!: boolean;
+
+  finishDate?: Date;
+
+  setFinished(finishDate: Date): void {
+    this.hasFinished = true;
+    this.finishDate = finishDate;
+  }
+}
