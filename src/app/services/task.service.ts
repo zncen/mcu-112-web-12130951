@@ -10,11 +10,10 @@ export class TaskService {
     console.log('Task Service - getById');
     return of(this.tasks.find((task) => task.id === id));
   }
-  getAll(): Observable<Todo[]> {
+  getAll(content: string | null): Observable<Todo[]> {
     console.log('Task Service - getAll');
     return of(this.tasks);
   }
-
   add(content: string): Observable<Todo> {
     console.log('Task Service - add');
     const id =
@@ -32,7 +31,6 @@ export class TaskService {
     this.tasks[index].finishDate = hasFinished ? new Date() : undefined;
     return of(this.tasks[index]);
   }
-
   remove(id: number): Observable<Todo> {
     console.log('Task Service - remove');
     const index = this.tasks.findIndex((task) => task.id === id);
