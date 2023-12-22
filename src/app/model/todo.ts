@@ -5,14 +5,13 @@ export class Todo {
       this.hasFinished = false;
     }
   }
-
   id!: number;
-
   content!: string;
-
   hasFinished!: boolean;
 
   finishDate?: Date;
+
+  tags!: string[];
 
   setFinished(finishDate: Date): void {
     this.hasFinished = true;
