@@ -1,3 +1,5 @@
+ 
+src/app/app.component.css
 div.container {
   margin: 0px auto;
   width: 550px;
@@ -7,6 +9,7 @@ div.container {
   border-bottom: none;
 }
 
+.todo-form,
 .todo-detail {
   margin-top: 50px;
 }
