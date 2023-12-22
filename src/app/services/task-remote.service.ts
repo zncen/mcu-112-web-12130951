@@ -17,12 +17,11 @@ export class TaskRemoteService {
     const url = content ? `${this.url}?content_like=${content}` : this.url;
     return this.httpClient.get<Todo[]>(url);
   }
-
-  add(content: string): Observable<Todo> {
+  add(task: Todo): Observable<Todo> {
     console.log('Task Remote Service - add');
-    const task = new Todo({ content });
     return this.httpClient.post<Todo>(this.url, task);
   }
+
   updateState({ id, content }: Todo, hasFinished: boolean): Observable<Todo> {
     console.log('Task Remote Service - update');
     const task = new Todo({ content, hasFinished });

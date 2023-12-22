@@ -16,7 +16,6 @@ import { TodoDetailComponent } from './todo-detail/todo-detail.component';
 import { TodoFormComponent } from './todo-form/todo-form.component';
 import { TodoListComponent } from './todo-list/todo-list.component';
 import { TodoSearchComponent } from './todo-search/todo-search.component';
-
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -45,9 +44,10 @@ export class AppComponent implements OnInit {
       this.search$
     ).pipe(switchMap(() => this.taskService.getAll(this.search$.value)));
   }
-  onAdd(): void {
-    this.taskService.add('待辦事項 C').subscribe(() => this.refresh$.next());
+  onSave(task: Todo): void {
+    this.taskService.add(task).subscribe(() => this.refresh$.next());
   }
+
   onRemove(id: number): void {
     this.taskService.remove(id).subscribe(() => this.refresh$.next());
   }
