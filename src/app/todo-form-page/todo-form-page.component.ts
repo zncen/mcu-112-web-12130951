@@ -1,10 +1,10 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { filter, map, Observable, switchMap, tap } from 'rxjs';
+
 import { Todo } from '../model/todo';
 import { TaskService } from '../services/task.service';
 import { TodoFormComponent } from '../todo-form/todo-form.component';
-import { map, filter, switchMap, tap, Observable } from 'rxjs';
-import { JsonPipe } from '@angular/common';
 
 @Component({
   selector: 'app-todo-form-page',
@@ -15,11 +15,8 @@ import { JsonPipe } from '@angular/common';
 })
 export class TodoFormPageComponent implements OnInit {
   taskService = inject(TaskService);
-
   id?: number;
-
   formData?: Todo;
-
   readonly router = inject(Router);
   readonly route = inject(ActivatedRoute);
   ngOnInit(): void {
@@ -32,7 +29,6 @@ export class TodoFormPageComponent implements OnInit {
       )
       .subscribe((formData) => (this.formData = formData));
   }
-
   onSave(task: Todo): void {
     let action$: Observable<Todo>;
     if (this.id) {
@@ -42,7 +38,6 @@ export class TodoFormPageComponent implements OnInit {
     }
     action$.subscribe(() => this.onCancel());
   }
-
   onCancel(): void {
     this.router.navigate(['home']);
   }
