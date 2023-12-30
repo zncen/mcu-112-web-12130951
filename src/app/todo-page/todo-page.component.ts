@@ -17,7 +17,6 @@ import { TodoFormComponent } from '../todo-form/todo-form.component';
 import { TodoListComponent } from '../todo-list/todo-list.component';
 import { TodoSearchComponent } from '../todo-search/todo-search.component';
 import { Router } from '@angular/router';
-
 @Component({
   selector: 'app-todo-page',
   standalone: true,
@@ -27,7 +26,6 @@ import { Router } from '@angular/router';
     HeaderComponent,
     TodoListComponent,
     TodoSearchComponent,
-    TodoFormComponent,
     FooterComponent,
   ],
   templateUrl: './todo-page.component.html',
@@ -37,20 +35,19 @@ export class TodoPageComponent implements OnInit {
   taskService = inject(TaskService);
   tasks$!: Observable<Todo[]>;
   readonly search$ = new BehaviorSubject<string | null>(null);
-
   readonly refresh$ = new Subject<void>();
-
   readonly router = inject(Router);
-
   ngOnInit(): void {
     this.tasks$ = merge(
       this.refresh$.pipe(startWith(undefined)),
       this.search$
     ).pipe(switchMap(() => this.taskService.getAll(this.search$.value)));
   }
-  onSave(task: Todo): void {
-    this.taskService.add(task).subscribe(() => this.refresh$.next());
+
+  onAdd(): void {
+    this.router.navigate(['todo-form']);
   }
+
   onRemove(id: number): void {
     this.taskService.remove(id).subscribe(() => this.refresh$.next());
   }
@@ -62,7 +59,6 @@ export class TodoPageComponent implements OnInit {
   onSearch(content: string | null): void {
     this.search$.next(content);
   }
-
   onView(id: number): void {
     this.router.navigate(['todo', id]);
   }
