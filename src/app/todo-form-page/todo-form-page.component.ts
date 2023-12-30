@@ -1,6 +1,7 @@
-import { Component, inject, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { filter, map, Observable, switchMap, tap } from 'rxjs';
+import { Component, inject, Input, numberAttribute } from '@angular/core';
+import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
+
 import { Todo } from '../model/todo';
 import { TaskService } from '../services/task.service';
 import { TodoFormComponent } from '../todo-form/todo-form.component';
@@ -11,39 +12,29 @@ import { TodoFormComponent } from '../todo-form/todo-form.component';
   templateUrl: './todo-form-page.component.html',
   styleUrl: './todo-form-page.component.css',
 })
-export class TodoFormPageComponent implements OnInit {
+export class TodoFormPageComponent {
   taskService = inject(TaskService);
-  title!: string;
-  id?: number;
-  formData?: Todo;
-  readonly router = inject(Router);
-  readonly route = inject(ActivatedRoute);
-  ngOnInit(): void {
-    this.route.paramMap
-      .pipe(
-        filter((paramMap) => paramMap.has('id')),
-        map((paramMap) => +paramMap.get('id')!)
-        )
-        .subscribe((id) => (this.id = id));
 
-        this.route.data
-        .pipe(
-          tap(({ title }) => (this.title = title)),
-          map(({ formData }) => formData)
-        )
-        .subscribe((formData) => (this.formData = formData));
+  @Input()
+  title!: string;
+
+  @Input({ transform: numberAttribute })
+  id?: number;
+
+  @Input()
+  formData?: Todo;
+
+  readonly router = inject(Router);
+  onSave(task: Todo): void {
+    let action$: Observable<Todo>;
+    if (this.id) {
+      action$ = this.taskService.update(this.id, task);
+    } else {
+      action$ = this.taskService.add(task);
     }
-  
-    onSave(task: Todo): void {
-      let action$: Observable<Todo>;
-      if (this.id) {
-        action$ = this.taskService.update(this.id, task);
-      } else {
-        action$ = this.taskService.add(task);
-      }
-      action$.subscribe(() => this.onCancel());
-    }
-    onCancel(): void {
-      this.router.navigate(['home']);
-    }
+    action$.subscribe(() => this.onCancel());
   }
+  onCancel(): void {
+    this.router.navigate(['home']);
+  }
+}
