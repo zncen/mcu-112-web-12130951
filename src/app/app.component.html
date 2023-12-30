@@ -1,3 +1,4 @@
+<app-nav-bar></app-nav-bar>
 <div class="container">
   <app-header></app-header>
   <app-todo-search (search)="onSearch($event)"></app-todo-search>
@@ -11,11 +12,9 @@
   </section>
   <app-footer></app-footer>
 </div>
-
 <div class="container">
   <app-todo-form (save)="onSave($event)"></app-todo-form>
 </div>
-
 <ng-container *ngIf="selectedId">
   <hr />
   <div class="container">

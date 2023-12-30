@@ -16,12 +16,15 @@ import { TodoDetailComponent } from './todo-detail/todo-detail.component';
 import { TodoFormComponent } from './todo-form/todo-form.component';
 import { TodoListComponent } from './todo-list/todo-list.component';
 import { TodoSearchComponent } from './todo-search/todo-search.component';
+import { NavBarComponent } from './nav-bar/nav-bar.component';
+
 @Component({
   selector: 'app-root',
   standalone: true,
   imports: [
     NgIf,
     AsyncPipe,
+    NavBarComponent,
     HeaderComponent,
     TodoListComponent,
     TodoDetailComponent,
@@ -47,7 +50,6 @@ export class AppComponent implements OnInit {
   onSave(task: Todo): void {
     this.taskService.add(task).subscribe(() => this.refresh$.next());
   }
-
   onRemove(id: number): void {
     this.taskService.remove(id).subscribe(() => this.refresh$.next());
   }
