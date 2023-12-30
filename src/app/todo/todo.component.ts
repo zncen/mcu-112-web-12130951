@@ -18,15 +18,17 @@ import { Todo } from '../model/todo';
 export class TodoComponent {
   @Input({ required: true })
   task!: Todo;
+
+  @Output()
+  edit = new EventEmitter<void>();
+
   @Output()
   remove = new EventEmitter<void>();
 
   @Output()
   view = new EventEmitter<void>();
-
   @Output()
   readonly stateChange = new EventEmitter<boolean>();
-
   @HostBinding('class')
   class = 'app-todo';
   onSetStatus(hasFinished: boolean): void {

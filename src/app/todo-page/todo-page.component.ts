@@ -43,9 +43,12 @@ export class TodoPageComponent implements OnInit {
       this.search$
     ).pipe(switchMap(() => this.taskService.getAll(this.search$.value)));
   }
-
   onAdd(): void {
     this.router.navigate(['todo-form']);
+  }
+
+  onEdit(id: number): void {
+    this.router.navigate(['todo-form', id]);
   }
 
   onRemove(id: number): void {
