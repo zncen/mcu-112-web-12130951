@@ -1,4 +1,8 @@
-div.container {
+h2 {
+    text-align: center;
+  }
+  
+  div.container {
     margin: 0px auto;
     width: 550px;
   }
