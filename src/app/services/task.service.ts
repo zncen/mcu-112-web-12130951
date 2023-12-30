@@ -13,7 +13,8 @@ export class TaskService {
   getAll(content: string | null): Observable<Todo[]> {
     console.log('Task Service - getAll');
     return of(this.tasks);
-  }  add({ content }: Todo): Observable<Todo> {
+  }
+  add({ content }: Todo): Observable<Todo> {
     console.log('Task Service - add');
     const id =
       this.tasks.length === 0
@@ -23,6 +24,11 @@ export class TaskService {
     this.tasks.push(task);
     return of(task);
   }
+
+  update(id: number, { content }: Todo): Observable<Todo> {
+    throw new Error('方法未實作');
+  }
+
   updateState({ id }: Todo, hasFinished: boolean): Observable<Todo> {
     console.log('Task Service - updateState');
     const index = this.tasks.findIndex((task) => task.id === id);
