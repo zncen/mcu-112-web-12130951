@@ -13,11 +13,8 @@ import { TodoFormComponent } from '../todo-form/todo-form.component';
 })
 export class TodoFormPageComponent implements OnInit {
   taskService = inject(TaskService);
-
   title!: string;
-
   id?: number;
-
   formData?: Todo;
   readonly router = inject(Router);
   readonly route = inject(ActivatedRoute);
@@ -25,27 +22,28 @@ export class TodoFormPageComponent implements OnInit {
     this.route.paramMap
       .pipe(
         filter((paramMap) => paramMap.has('id')),
-        map((paramMap) => +paramMap.get('id')!),
-        tap((id) => (this.id = id)),
-        switchMap((id) => this.taskService.getById(id))
-      )
-      .subscribe((formData) => (this.formData = formData));
+        map((paramMap) => +paramMap.get('id')!)
+        )
+        .subscribe((id) => (this.id = id));
 
-    this.route.data
-      .pipe(map(({ title }) => title))
-      .subscribe((title) => (this.title = title));
-  }
-
-  onSave(task: Todo): void {
-    let action$: Observable<Todo>;
-    if (this.id) {
-      action$ = this.taskService.update(this.id, task);
-    } else {
-      action$ = this.taskService.add(task);
+        this.route.data
+        .pipe(
+          tap(({ title }) => (this.title = title)),
+          map(({ formData }) => formData)
+        )
+        .subscribe((formData) => (this.formData = formData));
     }
-    action$.subscribe(() => this.onCancel());
+  
+    onSave(task: Todo): void {
+      let action$: Observable<Todo>;
+      if (this.id) {
+        action$ = this.taskService.update(this.id, task);
+      } else {
+        action$ = this.taskService.add(task);
+      }
+      action$.subscribe(() => this.onCancel());
+    }
+    onCancel(): void {
+      this.router.navigate(['home']);
+    }
   }
-  onCancel(): void {
-    this.router.navigate(['home']);
-  }
-}
